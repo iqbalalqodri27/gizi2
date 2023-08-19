@@ -138,7 +138,7 @@
                                                     <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-4 col-form-label">Tinggi Badan</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" name="tinggi_badan" class="form-control" value={{$posyandu->tinggi_badan}} required>
+                                                            <input type="number" name="tinggi_badan" class="form-control" step="0.01" min="0" lang="en" value={{$posyandu->tinggi_badan}} required>
                                                         </div>
                                                     </div>
 
@@ -264,7 +264,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">Tinggi Badan</label>
                             <div class="col-sm-8">
-                                <input type="number" name="tinggi_badan" class="form-control">
+                                <input type="number" name="tinggi_badan" class="form-control" step="0.01" min="0" lang="en">
                             </div>
                         </div>
 

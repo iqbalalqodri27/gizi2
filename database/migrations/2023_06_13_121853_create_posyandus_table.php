@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('child_id')->nullable();
             $table->decimal('berat_badan', 10, 1)->default(0);
-            $table->integer('tinggi_badan');
+            $table->decimal('tinggi_badan', 10, 1)->default(0);
             $table->integer('lingkaran_kepala');
             $table->enum('status', ['N', 'B', 'T', 'TP', 'O']);
             $table->integer('kalkulasi_bmi');
