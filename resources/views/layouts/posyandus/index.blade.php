@@ -75,7 +75,7 @@
                                     <td class="align-middle">{{$posyandu->child->nama}}</td>
                                     <td class="align-middle">{{$posyandu->child->jenis_kelamin}}</td>
                                     <td class="align-middle">{{$posyandu->berat_badan}}</td>
-                                    <td class="align-middle">{{$posyandu->tinggi_badan}}</td>
+                                    <td class="align-middle">{{$posyandu->tinggi_badan}} m</td>
                                     <td class="align-middle">{{$posyandu->lingkaran_kepala}}</td>
                                     <td class="align-middle">
                                         @if($posyandu->status == 'N')

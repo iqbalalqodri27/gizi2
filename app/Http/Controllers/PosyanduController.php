@@ -54,41 +54,54 @@ class PosyanduController extends Controller
         $child_id = $newStr[0];
         $usia_bulan = $newStr[1];
 
+            if($usia_bulan > 0) {
+
+                $Antropometri = Antropometri::where('umur',$usia_bulan)->first();
+        
+                $umur = $Antropometri->umur;
+                $median = $Antropometri->median;
+                $plus_satu_sd = $Antropometri->plus_satu_sd;
+                // dd($umur,$median,$plus_satu_sd);
+                // dd($Antropometri);    
             $Posyandu = new Posyandu;
             $Posyandu->child_id = $child_id;
-            $Posyandu->berat_badan = $request->berat_badan;
+            $Posyandu->berat_badan = $request->berat_badan; 
             $Posyandu->tinggi_badan = $request->tinggi_badan;
-            $tinggi_badan = $request->tinggi_badan / 100;
+            $tinggi_badan = $request->tinggi_badan;
             $Posyandu->lingkaran_kepala = $request->lingkaran_kepala;
             $Posyandu->status = $request->status;
             $Posyandu->created_at  = $request->created_at;
-            $Posyandu->kalkulasi_bmi = $Posyandu->berat_badan / ($tinggi_badan * $tinggi_badan) ;
 
-
-
-                $tb  = $request->tinggi_badan/100;
-                $bb  = $request->berat_badan;
-
-                /* Rumus BMI adalah:
-                BMI = BERAT BADAN / KUADRAT TINGGI BADAN
-                */   
-
-                $bmi = $bb / ($tb * $tb);
-            
-            if (($Posyandu->kalkulasi_bmi) < 11.00)
-            {
-                $Posyandu->bmi = 'Stunting';
-            }
-            elseif (($Posyandu->kalkulasi_bmi >= 15.00) && ($Posyandu->kalkulasi_bmi <= 18.00))
-            {
-                $Posyandu->bmi = 'Normal';
-            }
-            elseif (($Posyandu->kalkulasi_bmi >= 19.00) && ($Posyandu->kalkulasi_bmi <= 22.00))
-            {
-                $Posyandu->bmi = 'Obisitas';
-            }
                 
-            $Posyandu->save();
+                $tb = $request->tinggi_badan;
+                $bb = $request->berat_badan;
+                $BMI = $bb / $tb / $tb;
+                $IMT = round($BMI, 2);
+                // dd($IMT);
+                
+                $Z_Score1 = $IMT - $median;
+                $Z_Score2 = $plus_satu_sd - $median;
+
+                $Z_Score_Final =  $Z_Score1 / $Z_Score2;
+                $Z_Score_Round =round($Z_Score_Final, 2);
+                $Posyandu->kalkulasi_bmi = $Z_Score_Round;
+                // dd($Z_Score_Round);
+
+                if ($Z_Score_Round <= -2) {
+
+                    $Posyandu->bmi = 'Stunting';
+                    // dd('kurus');
+                }elseif ($Z_Score_Round <= 2) {
+                    $Posyandu->bmi = 'Normal';
+                    // dd('Normal');
+                }elseif($Z_Score_Round >2){
+                    $Posyandu->bmi = 'Obisitas';
+                    // dd('Obisitas');
+                }
+
+                $Posyandu->save();
+            }
+
             return redirect()->route('dataposyandu.index')->with('success','Tambah Data Posyandu Berhasil');
          }
     
@@ -143,7 +156,6 @@ class PosyanduController extends Controller
             $Posyandu->lingkaran_kepala = $request->lingkaran_kepala;
             $Posyandu->status = $request->status;
             $Posyandu->created_at  = $request->created_at;
-            $Posyandu->kalkulasi_bmi = $Posyandu->berat_badan / ($tinggi_badan * $tinggi_badan);
 
                 
                 $tb = $request->tinggi_badan;
@@ -157,6 +169,8 @@ class PosyanduController extends Controller
 
                 $Z_Score_Final =  $Z_Score1 / $Z_Score2;
                 $Z_Score_Round =round($Z_Score_Final, 2);
+                $Posyandu->kalkulasi_bmi = $Z_Score_Round;
+
                 // dd($Z_Score_Round);
 
                 if ($Z_Score_Final <= -2) {
