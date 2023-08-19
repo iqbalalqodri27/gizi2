@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('tinggi_badan', 10, 2)->default(0);
             $table->integer('lingkaran_kepala');
             $table->enum('status', ['N', 'B', 'T', 'TP', 'O']);
-            $table->integer('kalkulasi_bmi');
+            $table->decimal('kalkulasi_bmi', 10, 2)->default(0);
             $table->enum('bmi', ['Stunting', 'Normal', 'Obisitas']);
             $table->timestamps();
 

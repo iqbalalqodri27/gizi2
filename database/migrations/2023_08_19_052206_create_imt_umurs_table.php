@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('antropometris', function (Blueprint $table) {
+        Schema::create('imt_umurs', function (Blueprint $table) {
             $table->id();
             $table->integer('umur');
             $table->decimal('mines_tiga_sd', 10, 1)->default(0);
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->decimal('plus_satu_sd', 10, 1)->default(0);
             $table->decimal('plus_dua_sd', 10, 1)->default(0);
             $table->decimal('plus_tiga_sd', 10, 1)->default(0);
-
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('antropometris');
+        Schema::dropIfExists('imt_umurs');
     }
 };

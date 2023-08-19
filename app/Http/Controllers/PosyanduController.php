@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Posyandu;
-use App\Models\Antropometri;
+use App\Models\Imt_umur;
+use App\Models\BeratBadan_umur;
 use App\Models\Child;
 class PosyanduController extends Controller
 {
@@ -56,13 +57,13 @@ class PosyanduController extends Controller
 
             if($usia_bulan > 0) {
 
-                $Antropometri = Antropometri::where('umur',$usia_bulan)->first();
+                $Imt_umur = Imt_umur::where('umur',$usia_bulan)->first();
         
-                $umur = $Antropometri->umur;
-                $median = $Antropometri->median;
-                $plus_satu_sd = $Antropometri->plus_satu_sd;
+                $umur = $Imt_umur->umur;
+                $median = $Imt_umur->median;
+                $plus_satu_sd = $Imt_umur->plus_satu_sd;
                 // dd($umur,$median,$plus_satu_sd);
-                // dd($Antropometri);    
+                // dd($Imt_umur);    
             $Posyandu = new Posyandu;
             $Posyandu->child_id = $child_id;
             $Posyandu->berat_badan = $request->berat_badan; 
@@ -141,13 +142,13 @@ class PosyanduController extends Controller
 
             if($usia_bulan > 0) {
 
-                $Antropometri = Antropometri::where('umur',$usia_bulan)->first();
+                $Imt_umur = Imt_umur::where('umur',$usia_bulan)->first();
         
-                $umur = $Antropometri->umur;
-                $median = $Antropometri->median;
-                $plus_satu_sd = $Antropometri->plus_satu_sd;
+                $umur = $Imt_umur->umur;
+                $median = $Imt_umur->median;
+                $plus_satu_sd = $Imt_umur->plus_satu_sd;
                 // dd($umur,$median,$plus_satu_sd);
-                // dd($Antropometri);    
+                // dd($Imt_umur);    
 
             $Posyandu->child_id = $child_id;
             $Posyandu->berat_badan = $request->berat_badan; 
@@ -157,7 +158,13 @@ class PosyanduController extends Controller
             $Posyandu->status = $request->status;
             $Posyandu->created_at  = $request->created_at;
 
-                
+                // rumus untuk status Gizi
+                $bb = $request->berat_badan;
+
+
+
+
+                // rumus untuk Bmi
                 $tb = $request->tinggi_badan;
                 $bb = $request->berat_badan;
                 $BMI = $bb / $tb / $tb;
