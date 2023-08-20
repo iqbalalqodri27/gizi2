@@ -69,7 +69,9 @@ class PosyanduController extends Controller
             // rumus Untuk Mencari Status Gizi
 
             //Rumus Untuk Status Gizi
-            $Cari_Umur = BeratBadan_umur::where('umur',$usia_bulan)->first();
+            $Cari_Umur = BeratBadan_umur::where('umur',$usia_bulan)
+                ->where('jk',$jk)
+                ->first();
             $umur_bb = $Cari_Umur->umur;
             $median_bb= $Cari_Umur->median;
             $plus_satu_sd_bb = $Cari_Umur->plus_satu_sd;
@@ -101,7 +103,9 @@ class PosyanduController extends Controller
                 
 
             // rumus untuk mencari Status IMT
-             $Imt_umur = Imt_umur::where('umur',$usia_bulan)->first();
+            $Imt_umur = Imt_umur::where('umur',$usia_bulan)
+            ->where('jk',$jk)
+            ->first();
         
                 $umur = $Imt_umur->umur;
                 $median = $Imt_umur->median;
@@ -173,7 +177,8 @@ class PosyanduController extends Controller
         $newStr = explode("-", $str);
         $child_id = $newStr[0];
         $usia_bulan = $newStr[1];
-        // dd($usia_bulan);
+        $jk = $newStr[2];
+        // dd($newStr);
 
             if($usia_bulan > 0) {
 
@@ -187,7 +192,9 @@ class PosyanduController extends Controller
                 
 
                 //Rumus Untuk Status Gizi
-                $Cari_Umur = BeratBadan_umur::where('umur',$usia_bulan)->first();
+                $Cari_Umur = BeratBadan_umur::where('umur',$usia_bulan)
+                ->where('jk',$jk)
+                ->first();
                 $umur_bb = $Cari_Umur->umur;
                 $median_bb= $Cari_Umur->median;
                 $plus_satu_sd_bb = $Cari_Umur->plus_satu_sd;
@@ -217,7 +224,9 @@ class PosyanduController extends Controller
                 }
 
                 //rumus untuk status IMT
-                $Imt_umur = Imt_umur::where('umur',$usia_bulan)->first();
+                $Imt_umur = Imt_umur::where('umur',$usia_bulan)
+                ->where('jk',$jk)
+                ->first();
                 $umur = $Imt_umur->umur;
                 $median = $Imt_umur->median;
                 $plus_satu_sd = $Imt_umur->plus_satu_sd;

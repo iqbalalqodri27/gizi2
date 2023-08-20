@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('imt_umurs', function (Blueprint $table) {
             $table->id();
             $table->integer('umur');
+            $table->enum('jk', ['L', 'P']);
             $table->decimal('mines_tiga_sd', 10, 1)->default(0);
             $table->decimal('mines_dua_sd', 10, 1)->default(0);
             $table->decimal('mines_satu_sd', 10, 1)->default(0);
