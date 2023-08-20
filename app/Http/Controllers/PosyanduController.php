@@ -57,22 +57,57 @@ class PosyanduController extends Controller
 
             if($usia_bulan > 0) {
 
-                $Imt_umur = Imt_umur::where('umur',$usia_bulan)->first();
-        
-                $umur = $Imt_umur->umur;
-                $median = $Imt_umur->median;
-                $plus_satu_sd = $Imt_umur->plus_satu_sd;
-                // dd($umur,$median,$plus_satu_sd);
-                // dd($Imt_umur);    
+                   
             $Posyandu = new Posyandu;
             $Posyandu->child_id = $child_id;
             $Posyandu->berat_badan = $request->berat_badan; 
             $Posyandu->tinggi_badan = $request->tinggi_badan;
             $tinggi_badan = $request->tinggi_badan;
             $Posyandu->lingkaran_kepala = $request->lingkaran_kepala;
-            $Posyandu->status = $request->status;
-            $Posyandu->created_at  = $request->created_at;
+            // $Posyandu->status_gizi = $request->status_gizi;
 
+            // rumus Untuk Mencari Status Gizi
+
+            //Rumus Untuk Status Gizi
+            $Cari_Umur = BeratBadan_umur::where('umur',$usia_bulan)->first();
+            $umur_bb = $Cari_Umur->umur;
+            $median_bb= $Cari_Umur->median;
+            $plus_satu_sd_bb = $Cari_Umur->plus_satu_sd;
+            // dd($umur_bb,$median_bb,$plus_satu_sd_bb);
+
+            // dd($Cari_Umur);
+
+            $bb_bb = $request->berat_badan;
+
+            $Z_Score1_bb = $bb_bb - $median_bb;
+            $Z_Score2_bb = $plus_satu_sd_bb - $median_bb;
+
+            $Z_Score_Final_bb =  $Z_Score1_bb / $Z_Score2_bb;
+            $Z_Score_Round_bb =round($Z_Score_Final_bb, 2);
+
+            // dd($Z_Score_Round_bb);
+
+
+            if ($Z_Score_Round_bb <= -3) {
+                $Posyandu->status_gizi = 'Gizi Buruk';
+            }elseif($Z_Score_Round_bb <= -2){
+                $Posyandu->status_gizi = 'Gizi Kurang';
+            }elseif($Z_Score_Round_bb <=2){
+                $Posyandu->status_gizi = 'Gizi Baik';
+            }elseif($Z_Score_Round_bb > 2){
+                $Posyandu->status_gizi = 'Gizi Lebih';
+            }
+
+                
+
+            // rumus untuk mencari Status IMT
+             $Imt_umur = Imt_umur::where('umur',$usia_bulan)->first();
+        
+                $umur = $Imt_umur->umur;
+                $median = $Imt_umur->median;
+                $plus_satu_sd = $Imt_umur->plus_satu_sd;
+                // dd($umur,$median,$plus_satu_sd);
+                // dd($Imt_umur); 
                 
                 $tb = $request->tinggi_badan;
                 $bb = $request->berat_badan;
@@ -99,7 +134,7 @@ class PosyanduController extends Controller
                     $Posyandu->bmi = 'Obisitas';
                     // dd('Obisitas');
                 }
-
+                $Posyandu->created_at  = $request->created_at;
                 $Posyandu->save();
             }
 
@@ -142,28 +177,55 @@ class PosyanduController extends Controller
 
             if($usia_bulan > 0) {
 
-                $Imt_umur = Imt_umur::where('umur',$usia_bulan)->first();
-        
-                $umur = $Imt_umur->umur;
-                $median = $Imt_umur->median;
-                $plus_satu_sd = $Imt_umur->plus_satu_sd;
-                // dd($umur,$median,$plus_satu_sd);
-                // dd($Imt_umur);    
+      
 
             $Posyandu->child_id = $child_id;
             $Posyandu->berat_badan = $request->berat_badan; 
             $Posyandu->tinggi_badan = $request->tinggi_badan;
             $tinggi_badan = $request->tinggi_badan;
             $Posyandu->lingkaran_kepala = $request->lingkaran_kepala;
-            $Posyandu->status = $request->status;
-            $Posyandu->created_at  = $request->created_at;
+                
 
-                // rumus untuk status Gizi
+                //Rumus Untuk Status Gizi
+                $Cari_Umur = BeratBadan_umur::where('umur',$usia_bulan)->first();
+                $umur_bb = $Cari_Umur->umur;
+                $median_bb= $Cari_Umur->median;
+                $plus_satu_sd_bb = $Cari_Umur->plus_satu_sd;
+                // dd($umur_bb,$median_bb,$plus_satu_sd_bb);
+
+                // dd($Cari_Umur);
+
+                $bb_bb = $request->berat_badan;
+
+                $Z_Score1_bb = $bb_bb - $median_bb;
+                $Z_Score2_bb = $plus_satu_sd_bb - $median_bb;
+
+                $Z_Score_Final_bb =  $Z_Score1_bb / $Z_Score2_bb;
+                $Z_Score_Round_bb =round($Z_Score_Final_bb, 2);
+
+                // dd($Z_Score_Round_bb);
+
+
+                if ($Z_Score_Round_bb <= -3) {
+                    $Posyandu->status_gizi = 'Gizi Buruk';
+                }elseif($Z_Score_Round_bb < -2){
+                    $Posyandu->status_gizi = 'Gizi Kurang';
+                }elseif($Z_Score_Round_bb <=2){
+                    $Posyandu->status_gizi = 'Gizi Baik';
+                }elseif($Z_Score_Round_bb > 2){
+                    $Posyandu->status_gizi = 'Gizi Lebih';
+                }
+
+                //rumus untuk status IMT
+                $Imt_umur = Imt_umur::where('umur',$usia_bulan)->first();
+                $umur = $Imt_umur->umur;
+                $median = $Imt_umur->median;
+                $plus_satu_sd = $Imt_umur->plus_satu_sd;
+                // dd($umur,$median,$plus_satu_sd);
+                // dd($Imt_umur);  
+
+                // rumus untuk status IMT
                 $bb = $request->berat_badan;
-
-
-
-
                 // rumus untuk Bmi
                 $tb = $request->tinggi_badan;
                 $bb = $request->berat_badan;
@@ -180,18 +242,18 @@ class PosyanduController extends Controller
 
                 // dd($Z_Score_Round);
 
-                if ($Z_Score_Final <= -2) {
+                if ($Z_Score_Round <= -2) {
 
                     $Posyandu->bmi = 'Stunting';
                     // dd('kurus');
-                }elseif ($Z_Score_Final <= 2) {
+                }elseif ($Z_Score_Round <= 2) {
                     $Posyandu->bmi = 'Normal';
                     // dd('Normal');
-                }elseif($Z_Score_Final >2){
+                }elseif($Z_Score_Round >2){
                     $Posyandu->bmi = 'Obisitas';
                     // dd('Obisitas');
                 }
-
+                $Posyandu->created_at  = $request->created_at;
                 $Posyandu->save();
             }
             

@@ -62,8 +62,8 @@
                                     <th>Berat Badan</th>
                                     <th>Tinggi Badan</th>
                                     <th>Lingkaran Kepala</th>
-                                    <th>status</th>
-                                    <th>Status Gizi</th>
+                                    <th>status Gizi</th>
+                                    <th>Status IMT</th>
                                     <th>AKSI</th>
                                 </tr>
                             </thead>
@@ -77,19 +77,7 @@
                                     <td class="align-middle">{{$posyandu->berat_badan}}</td>
                                     <td class="align-middle">{{$posyandu->tinggi_badan}} m</td>
                                     <td class="align-middle">{{$posyandu->lingkaran_kepala}}</td>
-                                    <td class="align-middle">
-                                        @if($posyandu->status == 'N')
-                                        Naik
-                                        @elseif($posyandu->status == 'B')
-                                        Baru
-                                        @elseif($posyandu->status == 'T')
-                                        Turun
-                                        @elseif($posyandu->status == 'TP')
-                                        Tetap
-                                        @elseif($posyandu->status == 'O')
-                                        Bulan Lalu Tidak Hadir
-                                        @endif
-                                    </td>
+                                    <td class="align-middle">{{$posyandu->status_gizi}}</td>
                                     <td class="align-middle">{{$posyandu->bmi}}</td>
                                     
                                     <td>
@@ -149,7 +137,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
+                                                    {{-- <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-4 col-form-label">Status</label>
                                                         <div class="col-sm-8">
                                                             <select name="status" class="form-control select2" id="" style="width: 100%;" required>
@@ -161,7 +149,7 @@
                                                                 <option value="O" {{ $posyandu->status =='O' ? 'selected' : '' }}>Bulan Lalu Tidak Hadir</option>
                                                             </select>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                     {{-- <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-4 col-form-label">Status Gizi</label>
@@ -208,8 +196,8 @@
                                     <th>Berat Badan</th>
                                     <th>Tinggi Badan</th>
                                     <th>Lingkaran Kepala</th>
-                                    <th>Status</th>
-                                    <th>status Gizi</th>
+                                    <th>Status Gizi</th>
+                                    <th>status IMT</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>
@@ -275,7 +263,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">Status</label>
                             <div class="col-sm-8">
                                 <select name="status" class="form-control select2" id="" style="width: 100%;" required>
@@ -287,7 +275,7 @@
                                     <option value="O">Bulan Lalu Tidak Hadir</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">Status Gizi</label>

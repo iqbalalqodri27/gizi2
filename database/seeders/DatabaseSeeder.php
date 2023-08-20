@@ -78,9 +78,9 @@ class DatabaseSeeder extends Seeder
         DB::table('posyandus')->insert([
             'child_id' => 1,
             'berat_badan' => 15.2,
-            'tinggi_badan' => 98,
+            'tinggi_badan' => 0.98,
             'lingkaran_kepala' => 50,
-            'status' => 'N',
+            'status_gizi' => 'Gizi Baik',
             'kalkulasi_bmi' => 12,
             'bmi' => 'Stunting',
         ]);
