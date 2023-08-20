@@ -3,6 +3,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\MotherController;
 use App\Http\Controllers\ChildController; 
 use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ChartJSController;
 
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('dataibu', MotherController::class);
+
+    Route::resource('datausers', UsersController::class);
     
     Route::resource('dataanak', ChildController::class);
 
