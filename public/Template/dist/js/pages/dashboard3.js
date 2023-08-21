@@ -19,8 +19,8 @@ $(function () {
       labels: _ydata,
       datasets: [
         {
-          backgroundColor: ['#FFFF00','#FF8040','#6CC417','red'],
-          borderColor: ['#FFFF00','#FF8040','#6CC417', '#6CC417','red'],
+          backgroundColor: ['#6CC417','#FFFF00','#FF8040'],
+          borderColor: ['#FFFFF','#FFFF00','#FF8040'],
           data: _xdata
         }
       ]
