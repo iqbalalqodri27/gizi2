@@ -167,7 +167,7 @@
                                                     <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Input</label>
                                                         <div class="col-sm-8">
-                                                            <input type="date" name="created_at" class="form-control" value='{{$posyandu->created_at}}'>
+                                                            <input type="date" name="updated_at" class="form-control" value='{{$posyandu->updated_at}}' required>
                                                         </div>
                                                     </div>
 
@@ -236,7 +236,7 @@
                                 <select name="child_id" class="form-control select2" id="child_id" style="width: 100%;">
                                     <option value="0">Pilih Nama Anak</option>
                                     @foreach ($children as $child)
-                                    <option value="{{$child->id}}-{{$child->usia}}">{{$child->nama}} - usia  {{$child->usia}} bulan </option>
+                                    <option value="{{$child->id}}-{{$child->usia}}-{{ $child->jenis_kelamin }}">{{$child->nama}} - usia  {{$child->usia}} bulan </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -293,7 +293,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Input</label>
                             <div class="col-sm-8">
-                                <input type="date" name="created_at" class="form-control">
+                                <input type="date" name="created_at" class="form-control" required>
                             </div>
                         </div>
 

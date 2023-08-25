@@ -54,6 +54,8 @@ class PosyanduController extends Controller
         $newStr = explode("-", $str);
         $child_id = $newStr[0];
         $usia_bulan = $newStr[1];
+        $jk = $newStr[2];
+        // dd($child_id,$usia_bulan,$jk);
 
             if($usia_bulan > 0) {
 
@@ -89,6 +91,7 @@ class PosyanduController extends Controller
 
             // dd($Z_Score_Round_bb);
 
+            $Posyandu->kalkulasi_bbu = $Z_Score_Round_bb;
 
             if ($Z_Score_Round_bb <= -3) {
                 $Posyandu->status_gizi = 'Gizi Buruk';
@@ -124,7 +127,7 @@ class PosyanduController extends Controller
 
                 $Z_Score_Final =  $Z_Score1 / $Z_Score2;
                 $Z_Score_Round =round($Z_Score_Final, 2);
-                $Posyandu->kalkulasi_bmi = $Z_Score_Round;
+                $Posyandu->kalkulasi_imt = $Z_Score_Round;
                 // dd($Z_Score_Round);
 
                 if ($Z_Score_Round <= -2) {
@@ -198,24 +201,38 @@ class PosyanduController extends Controller
                 $umur_bb = $Cari_Umur->umur;
                 $median_bb= $Cari_Umur->median;
                 $plus_satu_sd_bb = $Cari_Umur->plus_satu_sd;
-                // dd($umur_bb,$median_bb,$plus_satu_sd_bb);
+                $mines_satu_sd_bb = $Cari_Umur->mines_satu_sd;
+
+                // dd($umur_bb,$median_bb,$plus_satu_sd_bb,$mines_satu_sd_bb);
 
                 // dd($Cari_Umur);
 
                 $bb_bb = $request->berat_badan;
 
                 $Z_Score1_bb = $bb_bb - $median_bb;
-                $Z_Score2_bb = $plus_satu_sd_bb - $median_bb;
+                // dd($Z_Score1_bb);
+                if ($Z_Score1_bb < 0) {
+                 $Z_Score2_bb = $median_bb - $mines_satu_sd_bb;
+                 $Z_Score_Final_bb = $Z_Score1_bb / $Z_Score2_bb;
+                 $Z_Score_Round_bb =round($Z_Score_Final_bb, 2);
+                // dd($Z_Score1_bb,$Z_Score2_bb,$Z_Score_Round_bb);
 
+
+
+                }elseif($Z_Score1_bb >= 0){
+                $Z_Score2_bb = $plus_satu_sd_bb - $median_bb;
                 $Z_Score_Final_bb =  $Z_Score1_bb / $Z_Score2_bb;
                 $Z_Score_Round_bb =round($Z_Score_Final_bb, 2);
+                // dd($Z_Score1_bb,$Z_Score2_bb,$Z_Score_Round_bb);
+                }
 
-                // dd($Z_Score_Round_bb);
+                $Posyandu->kalkulasi_bbu = $Z_Score_Round_bb;
+
 
 
                 if ($Z_Score_Round_bb <= -3) {
                     $Posyandu->status_gizi = 'Gizi Buruk';
-                }elseif($Z_Score_Round_bb < -2){
+                }elseif($Z_Score_Round_bb <= -2){
                     $Posyandu->status_gizi = 'Gizi Kurang';
                 }elseif($Z_Score_Round_bb <=2){
                     $Posyandu->status_gizi = 'Gizi Baik';
@@ -228,9 +245,11 @@ class PosyanduController extends Controller
                 ->where('jk',$jk)
                 ->first();
                 $umur = $Imt_umur->umur;
+                $jk = $Imt_umur->jk;
                 $median = $Imt_umur->median;
                 $plus_satu_sd = $Imt_umur->plus_satu_sd;
-                // dd($umur,$median,$plus_satu_sd);
+                $mines_satu_sd = $Imt_umur->mines_satu_sd;
+                // dd($umur,$median,$plus_satu_sd,$mines_satu_sd);
                 // dd($Imt_umur);  
 
                 // rumus untuk status IMT
@@ -241,17 +260,31 @@ class PosyanduController extends Controller
                 $BMI = $bb / $tb / $tb;
                 $IMT = round($BMI, 2);
                 // dd($IMT);
+
                 
                 $Z_Score1 = $IMT - $median;
-                $Z_Score2 = $plus_satu_sd - $median;
 
+                if ($Z_Score1 < 0) {
+                    $Z_Score2 =   $median - $mines_satu_sd;
+                    $Z_Score_Final =  $Z_Score1 / $Z_Score2;
+                    $Z_Score_Round =round($Z_Score_Final, 2);
+                    // dd($umur,$jk,$Z_Score1,$Z_Score2,$Z_Score_Round);
+
+                }elseif($Z_Score1 >=0){
+                $Z_Score2 = $plus_satu_sd - $median;
                 $Z_Score_Final =  $Z_Score1 / $Z_Score2;
                 $Z_Score_Round =round($Z_Score_Final, 2);
-                $Posyandu->kalkulasi_bmi = $Z_Score_Round;
+                // dd($umur,$jk,$Z_Score1,$Z_Score2,$Z_Score_Round);
+                
+
+                }
+
+                $Posyandu->kalkulasi_imt = $Z_Score_Round;
+                
 
                 // dd($Z_Score_Round);
 
-                if ($Z_Score_Round <= -2) {
+                if ($Z_Score_Round < -2) {
 
                     $Posyandu->bmi = 'Stunting';
                     // dd('kurus');
@@ -262,7 +295,7 @@ class PosyanduController extends Controller
                     $Posyandu->bmi = 'Obisitas';
                     // dd('Obisitas');
                 }
-                $Posyandu->created_at  = $request->created_at;
+                $Posyandu->updated_at  = $request->updated_at;
                 $Posyandu->save();
             }
             

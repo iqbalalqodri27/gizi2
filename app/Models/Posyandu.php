@@ -19,9 +19,12 @@ class Posyandu extends Model
         'berat_badan',
         'tinggi_badan',
         'lingkaran_kepala',
-        'status',
+        'status_gizi',
+        'kalkulasi_bbu',
+        'kalkulasi_imt',
         'bmi',
         'created_at',
+        'updated_at',
     ];
 
     public function child()

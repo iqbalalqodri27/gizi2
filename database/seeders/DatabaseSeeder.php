@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'tempat_lahir' => 'Jl. Sukabumi No.31 RT.00 RW.00 Jakarta',
             'tanggal_lahir' => '2020-05-16',
             'usia' => '39',
-            'jenis_kelamin' => 'L',
+            'jenis_kelamin' => 'P',
             'nama_ot' => 'Ibu Yuyun',
             'nik_ot' => '1234567890123456',
             'alamat_ot' => 'Jl. Sukabumi No.31 RT.00 RW.00 Jakarta',
@@ -75,15 +75,16 @@ class DatabaseSeeder extends Seeder
        
 
 
-        DB::table('posyandus')->insert([
-            'child_id' => 1,
-            'berat_badan' => 15.2,
-            'tinggi_badan' => 0.98,
-            'lingkaran_kepala' => 50,
-            'status_gizi' => 'Gizi Baik',
-            'kalkulasi_bmi' => 12,
-            'bmi' => 'Stunting',
-        ]);
+        // DB::table('posyandus')->insert([
+        //     'child_id' => 1,
+        //     'berat_badan' => 15.2,
+        //     'tinggi_badan' => 0.98,
+        //     'lingkaran_kepala' => 50,
+        //     'status_gizi' => 'Gizi Baik',
+        //     'kalkulasi_bbu' => 0,4,
+        //     'kalkulasi_imt' => 0,4,
+        //     'bmi' => 'Stunting',
+        // ]);
 
         // DB::table('posyandus')->insert([
         //     'child_id' => 2,
