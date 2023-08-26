@@ -48,6 +48,16 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                             halaman User
+                            <br>
+
+                            
+                            nama : {{$Users->name}}
+                            <br>
+                            
+                            email :{{$Users->email}}
+                            <br>
+
+                            passwrod : {{$Users->password}}
                     </div>
                     <!-- /.card-body -->
                 </div>

@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dataibu', MotherController::class);
 
-    Route::resource('datausers', UsersController::class);
+    Route::resource('akun', UsersController::class);
     
     Route::resource('dataanak', ChildController::class);
 

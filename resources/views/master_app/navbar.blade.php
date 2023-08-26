@@ -23,28 +23,35 @@
   </li> --}}
   <li class="nav-item">
     <a href="{{route('dataanak.index')}}" class="nav-link {{Request::is('dataanak')? 'active':''  }}">
-      <i class="nav-icon far fa-circle text-warning"></i>
+      <i class="nav-icon far fa fa-database text-info"></i>
       <p>DATA ANAK</p>
     </a>
   </li>
   <li class="nav-item">
     <a href="{{route('dataposyandu.index')}}" class="nav-link {{Request::is('dataposyandu')? 'active':''  }}">
-      <i class="nav-icon far fa-circle text-danger"></i>
+      <i class="nav-icon far fa fa-database text-warning"></i>
       <p>DATA POSYANDU</p>
     </a>
   </li>
 
   <li class="nav-item">
     <a href="chart" class="nav-link {{Request::is('chart')? 'active':''  }}">
-      <i class="nav-icon far fa-circle text-info"></i>
+      <i class="nav-icon far fa fa-signal text-success"></i>
       <p>Grafik</p>
     </a>
   </li>
 
   <li class="nav-item">
+    <a href="{{route('akun.index')}}" class="nav-link {{Request::is('akun')? 'active':''  }}">
+      <i class="nav-icon far fa fa-user text"></i>
+      <p>Pengaturan Akun</p>
+    </a>
+  </li>
+
+  <li class="nav-item">
     <a class="nav-link" href="{{ route('logout') }}">
-    <i class="nav-icon far fa-circle text-info"></i>
-      <p>Logout</p></a>
+    <i class="nav-icon far fa fa-reply-all text-danger"></i>
+      <p onsubmit="return confirm('Yakin Ingin Keluar ?')">Logout</p></a>
 </li>
 </ul>
 

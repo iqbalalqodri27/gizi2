@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class UsersController extends Controller
 {
@@ -11,8 +13,10 @@ class UsersController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $Users = User::Where('id',1)->first();
+    {   
+        $id = Auth::user()->id;
+        // dd($id);
+        $Users = User::Where('id',$id)->first();
        return view('layouts.users.index',compact('Users'));
     }
 
