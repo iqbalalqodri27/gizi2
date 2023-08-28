@@ -41,12 +41,12 @@
     </a>
   </li>
 
-  <li class="nav-item">
+  {{-- <li class="nav-item">
     <a href="{{route('akun.index')}}" class="nav-link {{Request::is('akun')? 'active':''  }}">
       <i class="nav-icon far fa fa-user text"></i>
       <p>Pengaturan Akun</p>
     </a>
-  </li>
+  </li> --}}
 
   <li class="nav-item">
     <a class="nav-link" href="{{ route('logout') }}">

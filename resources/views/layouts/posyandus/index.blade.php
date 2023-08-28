@@ -59,6 +59,7 @@
                                     <th>NO</th>
                                     <th>Nama Anak</th>
                                     <th>JK</th>
+                                    <th>RT/RW</th>
                                     <th>Berat Badan</th>
                                     <th>Tinggi Badan</th>
                                     <th>Lingkaran Kepala</th>
@@ -74,6 +75,7 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td class="align-middle">{{$posyandu->child->nama}}</td>
                                     <td class="align-middle">{{$posyandu->child->jenis_kelamin}}</td>
+                                    <td class="align-middle">{{$posyandu->child->alamat_ot}}</td>
                                     <td class="align-middle">{{$posyandu->berat_badan}}</td>
                                     <td class="align-middle">{{$posyandu->tinggi_badan}} m</td>
                                     <td class="align-middle">{{$posyandu->lingkaran_kepala}}</td>
@@ -167,6 +169,7 @@
                                     <th>NO</th>
                                     <th>Nama Anak</th>
                                     <th>JK</th>
+                                    <th>RT/RW</th>
                                     <th>Berat Badan</th>
                                     <th>Tinggi Badan</th>
                                     <th>Lingkaran Kepala</th>
