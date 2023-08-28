@@ -209,7 +209,7 @@
                                                     <div class="form-group">
                                                         <label for="exampleFormControlTextarea1">NIK</label>
                                                         
-                                                        <input type="number" name='nik' class="form-control" value="<?php echo $child['nik']; ?>" required>
+                                                        <input type="text" name='nik' class="form-control" maxlength="16" id="ccn" value="<?php echo $child['nik']; ?>" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlInput1">Tempat Lahir</label>
@@ -252,7 +252,7 @@
                                                     <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-4 col-form-label">NIK Orang Tua</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" name="nik_ot"  class="form-control" value='{{$child->nik_ot}}' required>
+                                                            <input type="text" name="nik_ot" maxlength="16" id="ccn"  class="form-control" value='{{$child->nik_ot}}' required>
                                                         </div>
                                                     </div>
 
@@ -336,7 +336,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">NIK Anak</label>
                             <div class="col-sm-8">
-                                <input type="number" name="nik" class="form-control" required>
+                                <input type="text" maxlength="16" id="ccn" name="nik" class="form-control" required>
                             </div>
                         </div>
 
@@ -389,7 +389,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">Nik Orang Tua</label>
                             <div class="col-sm-8">
-                                <input type="number" name="nik_ot" class="form-control" required>
+                                <input type="text" maxlength="16" id="ccn" name="nik_ot" class="form-control" required>
                             </div>
                         </div>
 
@@ -433,6 +433,15 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+</script>
+
+<script>
+    var ccn = $('#ccn').val();
+//Test the length, and use a regex to test 
+//that there are 16 numbers
+if( ccn.length < 16 || !/[0-9]{16}/.test(ccn) ) {
+   dd('data melebihi 16 digit !')
+}
 </script>
 
 
