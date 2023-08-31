@@ -41,25 +41,45 @@
                         {{Session::get('successDelete')}}
                     </div>
                     @endif
-                    <div class="card-header">
-                        {{-- <h3 class="card-title">DataTable with default features</h3> --}}
-                            Data User</a>
-                    </div>
+                    
                     <!-- /.card-header -->
-                    <div class="card-body">
-                            halaman User
-                            <br>
-
-                            
-                            nama : {{$Users->name}}
-                            <br>
-                            
-                            email :{{$Users->email}}
-                            <br>
-
-                            passwrod : {{$Users->password}}
-                    </div>
-                    <!-- /.card-body -->
+                    
+                        <div class="card card">
+                            <div class="card-header">
+                              <h3 class="card-title">Pengaturan Akun</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form class="form-horizontal" action="{{route('akun.update',$users->id)}}" method="POST">
+                                @method('PUT')
+                                @csrf
+                              <div class="card-body">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">username</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="inputtext3" name='name' placeholder="name" value="{{$users->name}}">
+                                    </div>
+                                  </div>
+                                <div class="form-group row">
+                                  <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                  <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail3" name='email' placeholder="Email" value="{{$users->email}}">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPassword3" name='password' placeholder="Password" value="">
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- /.card-body -->
+                              <div class="card-footer">
+                                <button type="submit" class="btn btn-success float-right">Update Akun</button>
+                              </div>
+                              <!-- /.card-footer -->
+                            </form>
+                          </div>
                 </div>
                 <!-- /.card -->
             </div>
@@ -70,128 +90,6 @@
     <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
-
-
-
-
-{{-- modal tambah data ibu --}}
-<div class="modal fade" id="modal-lg">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 id="modal-tambah" class="modal-title">Tambah Data Anak</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" action="{{Route('dataanak.store')}}" method="POST">
-                    @csrf
-                    <div id="modal-tambah" class="card-body">
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Nama Anak</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="nama" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">NIK Anak</label>
-                            <div class="col-sm-8">
-                                <input type="number" name="nik" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Tempat Lahir</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="tempat_lahir" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">tanggal Lahir</label>
-                            <div class="col-sm-8">
-                                <input type="date" name="tanggal_lahir" class="form-control" required>
-                            </div>
-                        </div>
-
-                        {{-- <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Usia</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="usia" class="form-control" required>
-                            </div>
-                        </div> --}}
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Jenis Kelamin</label>
-                            <div class="icheck-success d-inline">
-                                <input type="radio" name="jenis_kelamin" checked id="radioSuccess1" value="L">
-
-                                <label for="radioSuccess1">
-                                    Laki-Laki
-                                </label>
-                            </div>
-                            <div class="icheck-success d-inline">
-                                <input type="radio" name="jenis_kelamin" id="radioSuccess2" value="P">
-
-                                <label for="radioSuccess2">
-                                    Perempuan
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Nama Ibu</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="nama_ot" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">NIK</label>
-                            <div class="col-sm-8">
-                                <input type="number" name="nik_ot" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Alamat</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="alamat_ot" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Nomor Telpon</label>
-                            <div class="col-sm-8">
-                                <input type="number" name="no_tlp_ot" class="form-control" required>
-                            </div>
-                        </div>
-
-
-
-
-
-
-                    </div>
-
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info">Tambah</button>
-            </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-{{-- modal tambah data ibu --}}
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
 </script>

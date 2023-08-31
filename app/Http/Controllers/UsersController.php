@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class UsersController extends Controller
@@ -16,8 +17,8 @@ class UsersController extends Controller
     {   
         $id = Auth::user()->id;
         // dd($id);
-        $Users = User::Where('id',$id)->first();
-       return view('layouts.users.index',compact('Users'));
+        $users = User::Where('id',$id)->first();
+       return view('layouts.users.index',compact('users'));
     }
 
     /**
@@ -57,7 +58,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+            $Users = User::find($id);
+            $Users->name = $request->name;
+            $Users->email = $request->email;    
+            $Users->password = Hash::make($request->password);    
+            $Users->save();
+            return redirect()->route('akun.index')->with('successUpdate','Update Data Akun Berhasil');
     }
 
     /**
