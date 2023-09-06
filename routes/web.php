@@ -31,6 +31,13 @@ Route::get('/register', function () {
     return view('layouts.login');
 });
 
+
+
+Route::get('/forgot-password', [AuthController::class, 'forgot'])->middleware('guest')->name('password.request');
+
+
+
+
 Route::get('login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
